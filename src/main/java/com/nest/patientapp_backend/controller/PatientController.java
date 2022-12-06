@@ -8,14 +8,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class PatientController {
     @Autowired
     private PatientDao dao;
 
-    @GetMapping("/")
-    public String viewPage(){
-        return "welcome to products viewing page";
+    @GetMapping("/view")
+    public List<Patients> viewPage(){
+        return (List<Patients>)dao.findAll();
     }
     @PostMapping(path="/add",consumes = "application/json",produces = "application/json")
     public String addPage(@RequestBody Patients p){
